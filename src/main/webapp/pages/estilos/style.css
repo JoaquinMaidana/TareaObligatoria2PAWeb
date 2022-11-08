@@ -1,0 +1,105 @@
+body{
+    background-image: url("https://i.imgur.com/s8lQLBq.jpeg");
+    //background: url("https://i.imgur.com/d6cWesT.jpeg");
+}
+body>table{
+    width: 90%;
+    border-spacing: 20px;
+    
+}
+
+
+.section1-container{
+    display: grid;
+    grid-template-columns: auto 320px 150px 900px auto;
+    grid-template-rows: 80px 60px 30px 360px 20px;
+}
+
+.section1-form{
+    grid-column: 2;
+    grid-row: 4;
+}
+.section1-tabla{
+    grid-column: 4;
+    grid-row: 4;
+}
+.section1-buscar{
+    display: flex;
+    justify-content:end;
+    grid-column:2;
+    grid-row: 2;
+}
+#order{
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: white;
+    background-color: orange;
+    border: none;
+    border-radius: 15px;
+}
+.section1-title{
+    grid-column: 4;
+    grid-row:2;
+}
+.section1-title h1{
+    color:white;
+    margin: 0px;
+    padding: 0px;
+    font-size: 60px;
+    font-family: 'Oxygen';
+    font-weight: 2;
+}
+ .mainTable{
+    width: 100%;
+    border-collapse: collapse;
+} 
+tr:nth-child(even),table.mainTable thead>tr{
+    background-color: #dddddd;
+    border-color: white;
+}
+table.mainTable tbody>tr:nth-child(odd){
+    background-color: white;
+}
+td,th{
+    border: 2px solid #dddddd;
+    padding: 10px;
+}
+input[type=text],input[type=number]{
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom:10px;
+    box-sizing: border-box;
+    border: 1px solid orange;
+    border-radius: 15px;
+}
+input[type=submit]{
+    width: 30%;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    color: white;
+    background-color: orange;
+    border: none;
+    border-radius: 15px;
+}
+.button{
+    text-align: center;
+}
+a{
+    color: blue;
+    margin-left: 15px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.classValidate{
+    color: red;
+    margin-left: 5px;
+}
+.hide{
+    display: none;
+}
+label{
+    color: white;
+}
+

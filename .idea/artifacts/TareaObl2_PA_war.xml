@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TareaObl2_PA:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>TareaObl2_PA</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="TareaObl2_PA-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="TareaObl2_PA:war exploded" />
+    </root>
+  </artifact>
+</component>
