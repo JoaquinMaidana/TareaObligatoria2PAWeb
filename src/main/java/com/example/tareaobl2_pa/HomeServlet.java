@@ -1,7 +1,10 @@
 package com.example.tareaobl2_pa;
 
 import java.io.*;
+import java.util.Map;
 
+import Tarea2.Logica.Clases.Usuario;
+import Tarea2.Logica.Fabrica.Fabrica;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -35,7 +38,8 @@ public class HomeServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
-
+            Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
+            System.out.println("los usuarios son"+usuarios);
             dispatchPage("/pages/index.jsp", request, response);
 
         } catch (RuntimeException e) {
