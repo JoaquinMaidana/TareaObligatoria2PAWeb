@@ -1,6 +1,5 @@
 package Tarea2.Logica.Controladores;
 
-import Tarea2.Logica.Clases.E_EstadoUsuario;
 import Tarea2.Logica.Clases.Usuario;
 import Tarea2.Logica.Interfaces.IUsuario;
 import Tarea2.Persistencia.ConexionDB;
@@ -48,8 +47,8 @@ public class UsuarioController implements IUsuario {
                 String direccion = resultSet.getString("direccion");
                 LocalDate fechaNacimiento = resultSet.getDate("fechaNac").toLocalDate();
                 String imagen = resultSet.getString("imagen");
-                E_EstadoUsuario estado = E_EstadoUsuario.valueOf(resultSet.getString("estado"));
-                Usuario usuario = new Usuario( nombre, apellido, direccion, correo, fechaNacimiento, imagen, estado);
+
+                Usuario usuario = new Usuario( nombre, apellido, direccion, correo, fechaNacimiento, imagen);
                 usuarios.put(correo,usuario);
             }
 
@@ -70,34 +69,5 @@ public class UsuarioController implements IUsuario {
             }
         }
         return usuarios;
-    }
-    @Override
-    public void altaUsuario(Usuario usuario) {
-        Connection connection = null;
-        Statement statement = null;
-        System.out.println("Llega hasta aca");
-        String insertUsuario = "INSERT INTO `usuarios` (`nombre`, `apellido`, `correo`, `direccion`, `u_fechaNacimiento`, `imagen`, `estado`) " +
-                "VALUES ( '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '"+ usuario.getDireccion()+"','" + usuario.getFechaNacimiento() + "', '" + usuario.getImagen() + "','"+usuario.getEstado()+"'); ";
-
-        try {
-            System.out.println(insertUsuario);
-            connection = ConexionDB.getConnection();
-            statement = connection.createStatement();
-            statement.executeUpdate(insertUsuario);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al conectar con la base de datos", e);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al insertar el usuario", e);
-        } finally {
-            try {
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
-            }
-        }
     }
 }
