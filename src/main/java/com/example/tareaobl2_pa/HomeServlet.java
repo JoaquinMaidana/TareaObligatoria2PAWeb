@@ -1,4 +1,4 @@
-package Tarea2.serverlets;
+package com.example.tareaobl2_pa;
 
 import java.io.*;
 import java.util.Map;
@@ -10,21 +10,18 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "ListadoUsuario", value = "/listado-usuario")
-public class Listado extends HttpServlet {
-    Fabrica fabrica;
+@WebServlet(name = "helloServlet", value = "/home")
+public class HomeServlet extends HttpServlet {
+    private String message;
 
     public void init() {
-        fabrica = Fabrica.getInstance();
+        message = "Hello World!";
     }
-
     protected void dispatchPage(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         RequestDispatcher view = request.getRequestDispatcher(page);
         view.forward(request, response);
     }
-
-
     protected void dispatchError(String errorMessage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("message", errorMessage);
@@ -33,27 +30,24 @@ public class Listado extends HttpServlet {
         view.forward(request, response);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Si no hay sesión, redirigir a login
-
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
         try {
-
-                Map<String, Usuario> todosUsuarios = fabrica.getIUsuario().obtenerUsuarios();
-
-                request.setAttribute("todosUsuarios", todosUsuarios);
-
-                dispatchPage("/pages/usuario/listado-usuario.jsp", request, response);
-
-               // response.sendRedirect("login");
+        // Hello
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>" + message + "</h1>");
+        out.println("</body></html>");
+            Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
+            System.out.println("los usuarios son"+usuarios);
+            dispatchPage("/pages/index.jsp", request, response);
 
         } catch (RuntimeException e) {
+
             dispatchError("Error al obtener datos para los componentes de la pagina", request, response);
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void destroy() {
     }
 }
