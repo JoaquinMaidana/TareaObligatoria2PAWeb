@@ -9,18 +9,23 @@ public class Usuario {
     private String correo;
     private LocalDate fechaNacimiento;
     private String contrasenia;
+
+    private String direccion;
     private String imagen;
 
+    private E_EstadoUsuario estado;
     public Usuario() {
     }
 
-    public Usuario( String nombre, String apellido,String direccion, String correo, LocalDate fechaNacimiento, String imagen) {
+    public Usuario( String nombre, String apellido,String direccion, String correo, LocalDate fechaNacimiento, String imagen, E_EstadoUsuario estado) {
 
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
+        this.direccion= direccion;
         this.fechaNacimiento = fechaNacimiento;
         this.imagen = imagen;
+        this.estado = estado;
     }
 
 
@@ -62,6 +67,21 @@ public class Usuario {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public E_EstadoUsuario getEstado() {
+        return estado;
+    }
+    public void setEstado(E_EstadoUsuario estado) {
+        this.estado = estado;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     @Override
