@@ -1,4 +1,4 @@
-package Tarea2.serverlets;
+package Tarea2.serverlets.Usuario;
 
 import java.io.*;
 import java.util.Map;
@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "ListadoUsuario", value = "/listado-usuario")
+@WebServlet(name = "ListadoUsuario", value = "/listado")
 public class Listado extends HttpServlet {
     Fabrica fabrica;
 
@@ -43,7 +43,7 @@ public class Listado extends HttpServlet {
 
                 request.setAttribute("todosUsuarios", todosUsuarios);
 
-                dispatchPage("/pages/usuario/listado-usuario.jsp", request, response);
+                dispatchPage("/pages/listado.jsp", request, response);
 
                // response.sendRedirect("login");
 
