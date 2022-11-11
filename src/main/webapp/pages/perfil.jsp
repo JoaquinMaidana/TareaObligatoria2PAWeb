@@ -1,7 +1,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.stream.Collectors" %>
 <%@ page import="Tarea2.Logica.Clases.Usuario" %>
-<%@ page import="com.google.gson.Gson" %>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%  // Cargamos el usuarioLogueado en cada pantalla
@@ -11,14 +11,9 @@
     String messageType = request.getAttribute("messageType") instanceof String ? (String) request.getAttribute("messageType") : "";
 
     Usuario usuario = (Usuario) request.getAttribute("datos");
-    Boolean esPerfilPropio = request.getAttribute("esPerfilPropio") != null ? (Boolean) request.getAttribute("esPerfilPropio") : false;
 
-    String json = new Gson().toJson(usuario);
+    //String json = new Gson().toJson(usuario);
 
-    Map<String, Espectaculo> espectaculosAceptados = espectaculos.values()
-            .stream()
-            .filter(e -> e.getEstado().equals(E_EstadoEspectaculo.ACEPTADO))
-            .collect(Collectors.toMap(Espectaculo::getNombre, e -> e));
 %>
 <html>
 <head>
@@ -39,7 +34,7 @@
     <main class="coronaTicketsUY">
         <%@ include file="/pages/header.jsp" %>
         <div class="page-title">
-            <h3><%= esPerfilPropio ? "Mi Perfil" : "Perfil de " + usuario.getNickname()%></h3>
+
         </div>
         <section>
             <%@ include file="/pages/sidebar.jsp" %>
@@ -47,114 +42,26 @@
                 <%-- AGREGAR COMPONENTES ABAJO--%>
                 <img src="<%=usuario.getImagen()%>" alt="Foto de perfil" class="img_perfil">
                 <div class="first-data">
-                    <h2><%=usuario.getNombre() + " " + usuario.getApellido() + " - " + (usuario instanceof Artista ? "Artista" : "Espectador") %></h2>
-                    <h4><%=usuario.getNickname() + " / " + usuario.getCorreo()%></h4>
-                    <% if(esPerfilPropio) {%>
-                    <a class="btn" href="modificar-usuario?nickname=<%=usuario.getNickname()%>">Modificar usuario</a>
-                    <% } %>
+                    <h4><%=usuario.getNombre()+" "+usuario.getCorreo()%></h4>
+
+                    <a class="btn" href="modificar-usuario?correo=<%=usuario.getCorreo()%>">Modificar usuario</a>
+
                 </div>
                 <div class="tabs">
                     <div class="menu">
-                        <p data-target="#datos_generales" class="active">Datos Generales</p>
-                        <% if (usuario instanceof Artista) { %>
-                        <p data-target="#datos_artista">Datos Artista</p>
-                        <p data-target="#espectaculos">Espectaculos</p>
-                        <% } else { %>
-                        <p data-target="#funciones">Funciones</p>
-                        <% if (esPerfilPropio) { %>
-                        <p data-target="#paquetes">Paquetes adquiridos</p>
-                        <% }
-                        } %>
+                        <p data-target="#datos_generales" class="active">Datos</p>
+
                     </div>
 
                     <div class="content">
                         <div data-content id="datos_generales" class="active">
                             <h4>Nombre:<%=usuario.getNombre()%></h4>
                             <h4>Apellido:<%=usuario.getApellido()%></h4>
-                            <h4>Nickname:<%=usuario.getNickname()%></h4>
                             <h4>Correo:<%=usuario.getCorreo()%></h4>
+                            <h4>Direccion:<%=usuario.getDireccion()%></h4>
                             <h4>Fecha de Nacimiento:<%=usuario.getFechaNacimiento()%></h4>
                         </div>
 
-                        <% if (usuario instanceof Artista) { %>
-                        <div data-content id="datos_artista">
-                            <h4><%=((Artista) usuario).getDescripcion()%></h4>
-                            <h4><%=((Artista) usuario).getBiografia()%></h4>
-                            <h4>Sitio Web:<%=((Artista) usuario).getSitioWeb()%></h4>
-                        </div>
-
-                        <div data-content id="espectaculos">
-                            <table>
-                                <tbody>
-                                <% if (esPerfilPropio ? espectaculos.size() == 0 : espectaculosAceptados.size() == 0) { %>
-                                <tr>
-                                    <th>
-                                        <h4>
-                                            <%= esPerfilPropio ? "No tienes espectaculos" : "No tiene espectaculos aceptados"%>
-                                        </h4>
-                                    </th>
-                                </tr>
-                                <% } else {
-                                    for (Espectaculo elem : espectaculos.values()) {
-                                        if (elem.getEstado() == E_EstadoEspectaculo.ACEPTADO || esPerfilPropio) { %>
-                                <tr onclick="location.href='detalle-espectaculo?nombre=<%=elem.getNombre()%>&plataforma=<%=elem.getPlataforma().getNombre()%>'">
-                                    <th><%=elem.getNombre()%> </th>
-                                    <th> <%=elem.getPlataforma().getNombre()%> </th>
-                                </tr>
-                                <%          }
-                                }
-                                }%>
-                                </tbody>
-                            </table>
-                        </div>
-                        <% } else { %>
-                        <div data-content id="funciones">
-                            <table class="table">
-                                <tbody>
-                                <% if (funciones.size() == 0) { %>
-                                <tr>
-                                    <th>
-                                        <h4>
-                                            <%= esPerfilPropio ? "No tienes funciones" : "No tiene funciones"%>
-                                        </h4>
-                                    </th>
-                                </tr>
-                                <% } else {
-                                    for (EspectadorRegistradoAFuncion elem : funciones.values()) { %>
-                                <tr onclick="location.href='detalle-funcion?nombre=<%=elem.getFuncion().getNombre()%>&espectaculo=<%=elem.getFuncion().getEspectaculo().getNombre()%>&plataforma=<%=elem.getFuncion().getEspectaculo().getPlataforma().getNombre()%>'">
-                                    <th><%=elem.getFuncion().getNombre()%> </th>
-                                    <th> <%=elem.getFuncion().getEspectaculo().getNombre()%> </th>
-                                    <th> <%=elem.getFuncion().getEspectaculo().getPlataforma().getNombre()%> </th>
-                                </tr>
-                                <%      }
-                                }%>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div data-content id="paquetes">
-                            <table class="table">
-                                <tbody>
-                                <% if (paquetes.size() == 0) { %>
-                                <tr>
-                                    <th>
-                                        <h4>No tienes paquetes comprados</h4>
-                                    </th>
-                                </tr>
-                                <% } else {
-                                    for (EspectadorPaquete paquete : paquetes.values()) { %>
-                                <tr>
-                                    <th>
-                                        <a href="detalle-paquete?nombre=<%=paquete.getPaquete().getNombre()%>"><%=paquete.getPaquete().getNombre()%>
-                                        </a>
-                                    </th>
-                                </tr>
-                                <%      }
-                                } %>
-                                </tbody>
-                            </table>
-                        </div>
-                        <% } %>
                     </div>
                 </div>
                 <%-- AGREGAR COMPONENTES ARRIBA--%>
