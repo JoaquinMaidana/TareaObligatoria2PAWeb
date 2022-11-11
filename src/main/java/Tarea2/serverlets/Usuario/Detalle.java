@@ -1,2 +1,4 @@
-package Tarea2.serverlets.Usuario;public class Detalle {
+package Tarea2.serverlets.Usuario;
+
+public class Detalle {
 }

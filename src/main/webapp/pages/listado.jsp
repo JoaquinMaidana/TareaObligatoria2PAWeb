@@ -83,7 +83,7 @@
         celdaNickname.innerHTML = "<%=elem.getCorreo()%>";
 
         nuevaFila.addEventListener("click", function(){
-            window.location.href = "perfil?nickname=<%=elem.getCorreo()%>";
+            window.location.href = "perfil?correo=<%=elem.getCorreo()%>";
         });
         <% } %>
     }
