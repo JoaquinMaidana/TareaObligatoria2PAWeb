@@ -57,14 +57,14 @@
         <div class="header__left">
             <ul>
                 <li><a href="listado">Listado Usuarios</a></li>
-                <li><a href="listado-espectaculos">Nuevo Usuario</a></li>
+                <li><a href="alta">Nuevo Usuario</a></li>
                 <li><a href="listado-funciones">Funciones</a></li>
 
             </ul>
         </div>
         <div class="header__right">
             <div class="header__right__search">
-                <input type="text" placeholder="Buscar espectaculo, paquete, y más...">
+                <input type="text" placeholder="">
                 <button type="submit">
                     <img src="https://i.imgur.com/wkx2zCs.png" alt="search">
                 </button>
