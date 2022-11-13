@@ -44,7 +44,7 @@
                 <div class="first-data">
                     <h4><%=usuario.getNombre()+" "+usuario.getCorreo()%></h4>
 
-                    <a class="btn" href="modificar-usuario?correo=<%=usuario.getCorreo()%>">Modificar usuario</a>
+                    <a class="btn" href="modificar?correo=<%=usuario.getCorreo()%>">Modificar usuario</a>
 
                 </div>
                 <div class="tabs">
