@@ -17,7 +17,7 @@
     <style><%@ include file="/pages/estilos/global.css" %></style>
     <style><%@ include file="/pages/estilos/listado-usuarios.css" %></style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CoronaTicketsUY</title>
+    <title>TareaOBL2</title>
 </head>
 <body>
 <div class="background_container">
@@ -36,15 +36,15 @@
                 <%-- AGREGAR COMPONENTES ABAJO--%>
                 <div class="busqueda">
                     <label for="txtBuscar">Filtrar Usuario: </label>
-                    <input type="text" name="buscarUsuario" id="txtBuscar" value="Nickname...">
+                    <input type="text" name="buscarUsuario" id="txtBuscar" value="Correo...">
                 </div>
                 <br />
                 <div>
                     <table class="tablaUsuarios" id="tabla">
                         <thead>
                         <tr>
-                            <th>Nickname</th>
-                            <th>Tipo de usuario</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
                         </tr>
                         </thead>
                         <tbody id="cuerpoTabla">
@@ -73,15 +73,15 @@
     function crearTabla(){
         let nuevaFila;
         let celdaNickname;
-        let celdaTipo;
+        let celdaCorreo;
 
         <% for (Usuario elem : usuarioMap.values()) {%>
         nuevaFila = TABLA.insertRow(-1);
         celdaNickname = nuevaFila.insertCell(0);
-        celdaTipo = nuevaFila.insertCell(1);
+        celdaCorreo = nuevaFila.insertCell(1);
 
-        celdaNickname.innerHTML = "<%=elem.getCorreo()%>";
-
+        celdaNickname.innerHTML = "<%=elem.getNombre()%>";
+        celdaCorreo.innerHTML = "<%=elem.getCorreo()%>";
         nuevaFila.addEventListener("click", function(){
             window.location.href = "perfil?correo=<%=elem.getCorreo()%>";
         });

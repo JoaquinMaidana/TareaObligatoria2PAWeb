@@ -82,13 +82,13 @@ public class Modificar extends HttpServlet {
         String apellido = request.getParameter("apellido");
         String direccion = request.getParameter("direccion");
         String fechaNac_str = request.getParameter("fechaNac");
-        Part part=request.getPart("imagen");
+        //Part part=request.getPart("imagen");
 
         System.out.println(nombre);
         System.out.println(apellido);
         System.out.println(direccion);
         System.out.println(fechaNac_str);
-        System.out.println(part);
+        //System.out.println(part);
 
         // Validar los datos traidos del formulario:
 
@@ -107,10 +107,7 @@ public class Modificar extends HttpServlet {
         }
 
         String urlImagen="";
-        if(part.getSize()!=0){
-            InputStream inputImagen=part.getInputStream();
-            urlImagen= Fabrica.getInstance().getIDatabase().guardarImagen((FileInputStream) inputImagen);
-        }
+
         if(usu!=null){
             usu.setNombre(nombre);
             usu.setApellido(apellido);

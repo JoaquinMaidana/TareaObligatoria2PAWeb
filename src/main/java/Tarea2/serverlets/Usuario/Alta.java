@@ -98,18 +98,7 @@ public class Alta extends HttpServlet {
         }
 
         String urlImagen="https://i.imgur.com/e4W1PV0.png";
-        try {
-            if (part.getSize() != 0) {
-                InputStream inputImagen = part.getInputStream();
-                //urlImagen = Fabrica.getInstance().getIDatabase().guardarImagen((FileInputStream) inputImagen);
-            }
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            request.setAttribute("message", "Error al guardar la imagen");
-            request.setAttribute("messageType", "error");
-            dispatchPage("/pages/alta.jsp", request, response);
-            return;
-        }
+
 
             Usuario usuario = new Usuario( nombre, apellido,direccion, correo, fechaNac, urlImagen, E_EstadoUsuario.ACTIVADO);
 
