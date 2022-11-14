@@ -55,7 +55,7 @@
             <%@ include file="/pages/sidebar.jsp" %>
             <div class="main-container">
                 <%-- AGREGAR COMPONENTES ABAJO--%>
-                <form id="idform" name="myform" method="POST" action="modificar" enctype="multipart/form-data">
+                <form id="idform" name="myform"   enctype="multipart/form-data">
                     <div id="camposComunes">
                         <div class="input-group-container">
                             <div class="input-container">
@@ -163,16 +163,31 @@
             return;
         }
 
-
+        let cadena = nombre+","+apellido+","+fechaNac+","+direccion+","+imagen;
         //Enviar formulario con jquery
         if (formularioValido) {
             document.getElementById("idform").submit();
-        } else {
+
+            $.ajax({
+                type : 'PUT',
+                //url : url,
+                contentType: 'application/json',
+                data : cadena,
+                success : function(data, status, xhr){
+                    console.log(data);
+                    window.location.replace("perfil?correo="+correo);
+                },
+                error: function(xhr, status, error){
+                    //$('#msg').html('<span style=\'color:red;\'>'+error+'</span>')
+                    console.log("hubo error");
+                }
+            });
+        }
+        else {
             alert("EL FORMULARIO NO SE ENVIO POR INVALIDO")
             const SUBMITBUTTON = $("#submitBtn");
             SUBMITBUTTON.prop("disabled", false);
         }
-
     }
 
 

@@ -12,7 +12,7 @@
 
     Usuario usuario = (Usuario) request.getAttribute("datos");
 
-    //String json = new Gson().toJson(usuario);
+
 
 %>
 <html>
