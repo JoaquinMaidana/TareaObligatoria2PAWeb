@@ -1,5 +1,6 @@
 package Tarea2.serverlets.Usuario;
 
+import Tarea2.Logica.Clases.E_EstadoUsuario;
 import Tarea2.Logica.Clases.Usuario;
 import Tarea2.Logica.Fabrica.Fabrica;
 import jakarta.servlet.RequestDispatcher;
@@ -63,6 +64,47 @@ public class Detalle extends HttpServlet {
 
 
                 dispatchPage("/pages/perfil.jsp", request, response);
+
+        } catch (RuntimeException e) {
+            dispatchError("Error al obtener datos para los componentes de la pagina", request, response);
+        }
+    }
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Si no hay sesión, redirigir a login
+
+        try {
+
+            //HttpSession session = request.getSession();
+            String correo = (String)request.getParameter("correo");
+
+            Usuario usuario;
+            // Si el usuario no viene vacio y no es mi perfil entonces buscar por nickname
+            if(!correo.isEmpty() ) {
+
+                boolean usuarioExistePorCorreo = fabrica.getIUsuario().obtenerUsuarioPorCorreo(correo).isPresent();
+                if (!usuarioExistePorCorreo) { // Si el usuario no existe por correo, redirigir al listado de usuarios
+                    request.setAttribute("respuesta", "Usuario no encontrado");
+                    response.sendRedirect("listado");// re ver esto
+                    return;
+                }
+                usuario=fabrica.getIUsuario().obtenerUsuarioPorCorreo(correo).get();
+                if(usuario.getEstado().equals(E_EstadoUsuario.DESACTIVADO)){
+                    request.setAttribute("respuesta", "El usuario ya estaba desactivado");
+                    System.out.println("ya estaba desact");
+                }
+                else{
+                    fabrica.getIUsuario().cambiarEstadoUsuario(usuario.getCorreo(),E_EstadoUsuario.DESACTIVADO);
+                    request.setAttribute("respuesta", "Se ha desactivado el usuario");
+                    System.out.println("desact");
+                }
+
+            }else{
+                //dispatchPage("/pages/listado.jsp", request, response);
+            }
+
+
+           // dispatchPage("/pages/listado.jsp", request, response);
 
         } catch (RuntimeException e) {
             dispatchError("Error al obtener datos para los componentes de la pagina", request, response);

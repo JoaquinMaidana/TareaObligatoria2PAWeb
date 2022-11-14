@@ -43,8 +43,11 @@
                 <img src="<%=usuario.getImagen()%>" alt="Foto de perfil" class="img_perfil">
                 <div class="first-data">
                     <h4><%=usuario.getNombre()+" "+usuario.getCorreo()%></h4>
+                    <div class="buttons">
+                        <a class="btn" href="modificar?correo=<%=usuario.getCorreo()%>">Modificar Usuario</a>
+                        <a class="btn" id="btn_desactivar">Desactivar Usuario</a>
+                    </div>
 
-                    <a class="btn" href="modificar?correo=<%=usuario.getCorreo()%>">Modificar usuario</a>
 
                 </div>
                 <div class="tabs">
@@ -60,6 +63,7 @@
                             <h4>Correo:<%=usuario.getCorreo()%></h4>
                             <h4>Direccion:<%=usuario.getDireccion()%></h4>
                             <h4>Fecha de Nacimiento:<%=usuario.getFechaNacimiento()%></h4>
+
                         </div>
 
                     </div>
@@ -96,6 +100,27 @@
             })
         })
     });
+
+    function desactivar_usuario(){
+        const http = new XMLHttpRequest();
+        const url ="";
+        http.open("DELETE","perfil?correo=<%=usuario.getCorreo()%>");
+        http.onreadystatechange = function (){
+            if(http.status==200 && http.readyState===XMLHttpRequest.DONE){
+                console.log("Desactivado")
+                window.location.href = "listado";
+            }
+            else{
+                console.log("No desactivado")
+            }
+        }
+
+        http.send();
+    }
+    document.getElementById("btn_desactivar").addEventListener("click",function (){
+        desactivar_usuario();
+    });
+
 
 </script>
 </body>
