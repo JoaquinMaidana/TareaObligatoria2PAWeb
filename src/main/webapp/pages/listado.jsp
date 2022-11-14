@@ -1,6 +1,8 @@
 
 <%@ page import="java.util.Map" %>
 <%@ page import="Tarea2.Logica.Clases.Usuario" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="Tarea2.Logica.Clases.E_EstadoUsuario" %>
 
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -9,7 +11,7 @@
 
     String message = request.getAttribute("message") instanceof String ? (String) request.getAttribute("message") : "";
     String messageType = request.getAttribute("messageType") instanceof String ? (String) request.getAttribute("messageType") : "";
-
+    Map<String, Usuario> usuarioMap = request.getAttribute("todosUsuarios") != null ? (Map<String, Usuario>) request.getAttribute("todosUsuarios") : new HashMap<>();
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +33,7 @@
             <h3>Listado de usuarios</h3>
         </div>
         <section>
-            <%@ include file="/pages/sidebar.jsp" %>
+
             <div class="main-container">
                 <%-- AGREGAR COMPONENTES ABAJO--%>
                 <div class="busqueda">
@@ -75,17 +77,23 @@
         let celdaNickname;
         let celdaCorreo;
 
-        <% for (Usuario elem : usuarioMap.values()) {%>
-        nuevaFila = TABLA.insertRow(-1);
-        celdaNickname = nuevaFila.insertCell(0);
-        celdaCorreo = nuevaFila.insertCell(1);
+        <% for (Usuario elem : usuarioMap.values()) {
+            if(elem.getEstado().equals(E_EstadoUsuario.ACTIVADO)){
+        %>
+                nuevaFila = TABLA.insertRow(-1);
+                celdaNickname = nuevaFila.insertCell(0);
+                celdaCorreo = nuevaFila.insertCell(1);
 
-        celdaNickname.innerHTML = "<%=elem.getNombre()%>";
-        celdaCorreo.innerHTML = "<%=elem.getCorreo()%>";
-        nuevaFila.addEventListener("click", function(){
-            window.location.href = "perfil?correo=<%=elem.getCorreo()%>";
-        });
-        <% } %>
+                celdaNickname.innerHTML = "<%=elem.getNombre()%>";
+                celdaCorreo.innerHTML = "<%=elem.getCorreo()%>";
+                nuevaFila.addEventListener("click", function(){
+                    window.location.href = "perfil?correo=<%=elem.getCorreo()%>";
+                });
+        <%
+            }
+          }
+
+       %>
     }
 
     TXT_BUSCAR.on("keyup", function() {

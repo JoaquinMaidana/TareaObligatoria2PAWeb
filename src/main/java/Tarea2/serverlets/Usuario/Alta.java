@@ -109,6 +109,7 @@ public class Alta extends HttpServlet {
             // Redireccionar a la pantalla de login
             request.getSession().setAttribute("message", "Usuario creado exitosamente");
             request.setAttribute("messageType", "success");
+            request.setAttribute("message", "Usuario creado exitosamente");
             response.sendRedirect("listado"); // redirigir a otro servlet (por url)
         } catch (RuntimeException e){
             System.out.println(e.getMessage());

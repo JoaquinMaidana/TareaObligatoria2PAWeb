@@ -112,6 +112,7 @@ public class Modificar extends HttpServlet {
             usu.setNombre(nombre);
             usu.setApellido(apellido);
             usu.setFechaNacimiento(fechaNac);
+            usu.setDireccion(direccion);
             if(!urlImagen.equals(""))
                 usu.setImagen(urlImagen);
         }

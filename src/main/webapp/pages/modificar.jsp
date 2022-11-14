@@ -77,7 +77,7 @@
                             <input type="email" id="correo" name="correo" placeholder="*Correo..." maxlength="30"
                                    value="<%= correo%>" readonly>
                         </div>
-                        //enviar correo por parametro al post
+
                         <div class="input-group-container">
                             <div class="input-container">
                                 <label class="subtitulos" for="fechaNac">Fecha de nacimiento</label>
@@ -116,6 +116,7 @@
 
     function mensaje(msg) {
         const SUBMITBUTTON = $("#submitBtn");
+
         const MESSAGE = $("#message");
         MESSAGE.text(msg);
         MESSAGE.addClass("error");
@@ -149,7 +150,8 @@
         if ( nombre === "" || apellido === "" || fechaNac === "" || direccion === "" || correo === "") {
             alert("Complete todos los campos obligatorios");
             formularioValido = false;
-            return;
+            SUBMITBUTTON.prop("disabled", false);
+            return ;
         }
 
 
@@ -157,6 +159,7 @@
         if ((new Date(fechaNac) > new Date()) || (new Date(fechaNac).getFullYear() < 1900)){
             alert("Fecha no valida");
             formularioValido = false;
+            SUBMITBUTTON.prop("disabled", false);
             return;
         }
 
@@ -169,7 +172,7 @@
             const SUBMITBUTTON = $("#submitBtn");
             SUBMITBUTTON.prop("disabled", false);
         }
-
+        SUBMITBUTTON.prop("disabled", false);
     }
 
 
