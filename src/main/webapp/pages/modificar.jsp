@@ -38,7 +38,7 @@
     </style>
     <style><%@ include file="/pages/estilos/registro.css" %></style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CoronaTicketsUY</title>
+    <title>TareaOBL2</title>
 </head>
 <body>
 <div class="background_container">
@@ -84,14 +84,11 @@
                                 <input type="date" id="fechaNac" name="fechaNac" placeholder="*Fecha de nacimiento..."
                                        max="<%= LocalDate.now().toString() %>" value="<%= fechaNac%>">
                             </div>
-                            <div class="input-container">
-                                <label class="subtitulos" for="imagen">Imagen de perfil</label>
-                                <input type="file" accept="image/*" id="imagen" name="imagen" value="<%= imagen%>">
-                            </div>
+
                         </div>
                     </div>
 
-                    <button id="submitBtn" type="button" onclick="enviarForm()">Registrarse!</button>
+                    <button id="submitBtn" type="button" onclick="enviarForm()">Modificar!</button>
                 </form>
                 <%-- AGREGAR COMPONENTES ARRIBA--%>
             </div>

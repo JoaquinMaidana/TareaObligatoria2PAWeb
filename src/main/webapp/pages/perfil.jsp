@@ -34,10 +34,10 @@
     <main class="coronaTicketsUY">
         <%@ include file="/pages/header.jsp" %>
         <div class="page-title">
-
+            <h3>Detalle de usuario</h3>
         </div>
         <section>
-            <%@ include file="/pages/sidebar.jsp" %>
+
             <div class="grid-container">
                 <%-- AGREGAR COMPONENTES ABAJO--%>
                 <img src="<%=usuario.getImagen()%>" alt="Foto de perfil" class="img_perfil">
