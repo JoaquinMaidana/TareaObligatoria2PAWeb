@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Bienvenido!</title>
 </head>
 <body>
 <h1><%= "Tarea obligatoria 2" %>

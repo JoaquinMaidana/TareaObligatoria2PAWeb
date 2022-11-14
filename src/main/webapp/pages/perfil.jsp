@@ -44,7 +44,7 @@
                 <div class="first-data">
                     <h4><%=usuario.getNombre()+" "+usuario.getCorreo()%></h4>
                     <div class="buttons">
-                        <a class="btn" href="modificar?correo=<%=usuario.getCorreo()%>">Modificar Usuario</a>
+                        <a class="btn" href="modificar?correo=<%=usuario.getCorreo()%>">Modificar Usuario</a>/
                         <a class="btn" id="btn_desactivar">Desactivar Usuario</a>
                     </div>
 
@@ -109,6 +109,7 @@
             if(http.status==200 && http.readyState===XMLHttpRequest.DONE){
                 console.log("Desactivado")
                 window.location.href = "listado";
+
             }
             else{
                 console.log("No desactivado")

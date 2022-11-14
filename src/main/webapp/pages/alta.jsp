@@ -76,7 +76,7 @@
                             <input type="email" id="correo" name="correo" placeholder="*Correo..." maxlength="30"
                                    value="<%= correo%>" >
                         </div>
-                        //enviar correo por parametro al post
+
                         <div class="input-group-container">
                             <div class="input-container">
                                 <label class="subtitulos" for="fechaNac">Fecha de nacimiento</label>
